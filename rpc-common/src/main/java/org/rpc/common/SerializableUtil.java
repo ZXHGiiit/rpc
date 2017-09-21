@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 序列化工具类，基于Prototuff实现
  */
 public class SerializableUtil {
+  //缓存schma，因为构建schma可能比较耗时间
   private static Map<Class<?>, Schema<?>> cachedSchema = new ConcurrentHashMap<>();
 
   private static Objenesis objenesis = new ObjenesisStd();
@@ -43,6 +44,7 @@ public class SerializableUtil {
   /**
    * 序列化  对象-->字节数组
    */
+  @SuppressWarnings("unchecked")
   public static <T> byte[] serialize(T obj) {
     Class<T> cls = (Class<T>) obj.getClass();
     LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
@@ -68,6 +70,7 @@ public class SerializableUtil {
        * */
       T message = (T) objenesis.newInstance(cls);//实例化
       Schema<T> schema = getSchema(cls);//获取类的schema
+      //使用给定的schema将byte数组和对象合并，并返回
       ProtostuffIOUtil.mergeFrom(data, message, schema);
       return message;
     } catch (Exception e) {
