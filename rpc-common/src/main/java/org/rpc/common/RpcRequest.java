@@ -9,7 +9,7 @@ public class RpcRequest {
   private String requestId;
   private String className;
   private String methodName;
-  private Class<?>[] paraneterTypes;
+  private Class<?>[] parameterTypes;
   private Object[] parameters;
 
   public String getRequestId() {
@@ -36,12 +36,12 @@ public class RpcRequest {
     this.methodName = methodName;
   }
 
-  public Class<?>[] getParaneterTypes() {
-    return paraneterTypes;
+  public Class<?>[] getParameterTypes() {
+    return parameterTypes;
   }
 
-  public void setParaneterTypes(Class<?>[] paraneterTypes) {
-    this.paraneterTypes = paraneterTypes;
+  public void setParameterTypes(Class<?>[] parameterTypes) {
+    this.parameterTypes = parameterTypes;
   }
 
   public Object[] getParameters() {
