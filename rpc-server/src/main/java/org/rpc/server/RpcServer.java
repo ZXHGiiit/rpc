@@ -93,7 +93,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
       String[] array = serverAddress.split(":");
       String host = array[0];
       int port = Integer.parseInt(array[1]);
-      //启动RPC服务  线程同步阻塞等待服务器绑定到指定端口,
+      //启动RPC服务
       ChannelFuture future = bootstrap.bind(host, port);
       LOGGER.info("server started on port{}", port);
       //注册rpc服务
