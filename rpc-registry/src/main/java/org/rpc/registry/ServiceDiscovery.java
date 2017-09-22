@@ -31,7 +31,7 @@ public class ServiceDiscovery {
   public ServiceDiscovery(String registryAddress) {
     this.registryAddress = registryAddress;
     ZooKeeper zk = connectServer();
-    if(zk != null) {
+    if (zk != null) {
       watchNode(zk);
     }
   }
@@ -42,8 +42,8 @@ public class ServiceDiscovery {
   public String discover() {
     String data = null;
     int size = dataList.size();
-    if(size > 0) {
-      if(size == 1) {
+    if (size > 0) {
+      if (size == 1) {
         data = dataList.get(0);
         LOGGER.info("ServiceDiscovery.discover.using only data: {}", data);
       } else {
@@ -61,10 +61,10 @@ public class ServiceDiscovery {
     ZooKeeper zk = null;
     try {
       zk = new ZooKeeper(registryAddress, Constant.ZK_SESSION_TIMEOUT,
-        new Watcher(){
+        new Watcher() {
           @Override
           public void process(WatchedEvent watchedEvent) {
-            if(watchedEvent.getState() == Event.KeeperState.SyncConnected) {
+            if (watchedEvent.getState() == Event.KeeperState.SyncConnected) {
               latch.countDown();
             }
           }
@@ -85,15 +85,15 @@ public class ServiceDiscovery {
         @Override
         public void process(WatchedEvent watchedEvent) {
           //节点改变
-          if(watchedEvent.getType() == Event.EventType.NodeChildrenChanged) {
+          if (watchedEvent.getType() == Event.EventType.NodeChildrenChanged) {
             watchNode(zk);
           }
         }
       });
       List<String> dataList = new ArrayList<>();
-      for(String node : nodeList) {
+      for (String node : nodeList) {
         byte[] bytes = zk.getData(Constant.ZK_REGISTRY_PATH + "/"
-        + node, false, null);
+          + node, false, null);
         dataList.add(new String(bytes));
       }
       LOGGER.info("ServiceDiscovery node date: {}", dataList);

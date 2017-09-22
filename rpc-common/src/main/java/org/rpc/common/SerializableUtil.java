@@ -20,7 +20,7 @@ public class SerializableUtil {
   //缓存schma，因为构建schma可能比较耗时间
   private static Map<Class<?>, Schema<?>> cachedSchema = new ConcurrentHashMap<>();
 
-  private static Objenesis objenesis = new ObjenesisStd();
+  private static Objenesis objenesis = new ObjenesisStd();//使用objenesis实例化对象，比java反射更强大
 
   private SerializableUtil() {
   }
