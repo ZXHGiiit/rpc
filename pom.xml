@@ -17,6 +17,11 @@
         <module>rpc-sample-client</module>
     </modules>
 
+    <properties>
+        <spring-version>4.3.1.RELEASE</spring-version>
+        <junit-version>4.12</junit-version>
+    </properties>
+    
     <dependencyManagement>
         <dependencies>
             <!-- SLF4J -->
