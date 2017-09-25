@@ -11,5 +11,29 @@
 
     <artifactId>rpc-sample-server</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <!--RPC Registry-->
+        <dependency>
+            <groupId>org.rpc</groupId>
+            <artifactId>rpc-registry</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- RPC Server -->
+        <dependency>
+            <groupId>org.rpc</groupId>
+            <artifactId>rpc-server</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- RPC Sample Client -->
+        <dependency>
+            <groupId>org.rpc</groupId>
+            <artifactId>rpc-sample-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

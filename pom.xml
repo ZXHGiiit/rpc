@@ -15,6 +15,7 @@
         <module>rpc-server</module>
         <module>rpc-client</module>
         <module>rpc-sample-client</module>
+        <module>rpc-sample-api</module>
     </modules>
 
     <properties>
