@@ -33,7 +33,7 @@ public class ServiceRegistry {
     if (data != null) {
       ZooKeeper zk = connectServer();
       if (zk != null) {
-
+        createNode(zk, data);
       }
     }
   }
@@ -67,8 +67,12 @@ public class ServiceRegistry {
       byte[] bytes = data.getBytes();
       if (zk.exists(Constant.ZK_REGISTRY_PATH, null) == null) {
         zk.create(Constant.ZK_REGISTRY_PATH, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode
-          .PERSISTENT_SEQUENTIAL);
+          .PERSISTENT);
       }
+
+      String path = zk.create(Constant.ZK_DATA_PATH, bytes, ZooDefs.Ids.OPEN_ACL_UNSAFE,
+        CreateMode.EPHEMERAL_SEQUENTIAL);
+      LOGGER.debug("ServiceRegistry.createNode.create zk node ({} => {})", path, data);
     } catch (Exception e) {
       LOGGER.error("", e);
     }

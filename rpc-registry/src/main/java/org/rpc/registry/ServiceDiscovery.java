@@ -90,13 +90,14 @@ public class ServiceDiscovery {
           }
         }
       });
+      System.out.println("nodeList: " + nodeList.toString());
       List<String> dataList = new ArrayList<>();
       for (String node : nodeList) {
         byte[] bytes = zk.getData(Constant.ZK_REGISTRY_PATH + "/"
           + node, false, null);
         dataList.add(new String(bytes));
       }
-      LOGGER.info("ServiceDiscovery node date: {}", dataList);
+      LOGGER.debug("ServiceDiscovery node date: {}", dataList);
       this.dataList = dataList;
     } catch (Exception e) {
       LOGGER.error("ServiceDiscovery", e);
