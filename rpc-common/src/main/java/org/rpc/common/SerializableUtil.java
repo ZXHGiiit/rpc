@@ -61,7 +61,6 @@ public class SerializableUtil {
   /**
    * 反序列化  字节数组-->对象
    */
-  @SuppressWarnings("unchecked")
   public static <T> T deserialize(byte[] data, Class<T> cls) {
     try {
       /*

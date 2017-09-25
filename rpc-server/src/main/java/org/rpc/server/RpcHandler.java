@@ -71,4 +71,10 @@ public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest> {
     FastMethod method = fastClass.getMethod(methodName, parameterTypes);//通过方法名和参数类型获取方法
     return method.invoke(serviceBean, parameters);
   }
+
+  @Override
+  public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+    LOGGER.error("server caught exception", cause);
+    ctx.close();
+  }
 }

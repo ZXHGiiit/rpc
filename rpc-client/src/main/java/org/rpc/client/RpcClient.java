@@ -56,9 +56,9 @@ public class RpcClient extends SimpleChannelInboundHandler<RpcResponse> {
           protected void initChannel(SocketChannel ch) throws Exception {
             // 向pipeline中添加编码、解码、业务处理的handler
             ch.pipeline()
-              .addLast(new RpcDecoder(RpcResponse.class))
-              .addLast(new RpcEncoder(RpcRequest.class))
-              .addLast(RpcClient.this);
+              .addLast(new RpcEncoder(RpcRequest.class))  //OUT - 1
+              .addLast(new RpcDecoder(RpcResponse.class)) //IN - 1
+              .addLast(RpcClient.this);                   //IN - 2
           }
         }).option(ChannelOption.SO_KEEPALIVE, true);
       //链接服务器  阻塞的方式

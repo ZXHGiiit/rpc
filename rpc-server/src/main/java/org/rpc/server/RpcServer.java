@@ -101,8 +101,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
       int port = Integer.parseInt(array[1]);
       //启动RPC服务
       ChannelFuture future = bootstrap.bind(host, port);
-      LOGGER.info("server started on port{}", port);
-      System.out.println("server started on port{}" + port);
+      LOGGER.debug("server started on port{}", port);
       //注册rpc服务
       if (serviceRegistry != null) {
         serviceRegistry.register(serverAddress);
@@ -111,7 +110,6 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
       future.channel().closeFuture().sync();
     } catch (Exception e) {
       LOGGER.error("RpcServer.ServerBootStrap启动失败", e);
-      System.out.println("启动失败" + e);
     } finally {
       workGroup.shutdownGracefully();
       bossGroup.shutdownGracefully();
