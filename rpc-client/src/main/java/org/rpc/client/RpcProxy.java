@@ -3,7 +3,6 @@ package org.rpc.client;
 import org.rpc.common.RpcRequest;
 import org.rpc.common.RpcResponse;
 import org.rpc.registry.ServiceDiscovery;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -15,10 +14,17 @@ import java.util.UUID;
  * RPC 代理
  */
 public class RpcProxy {
-  @Autowired
   private String serverAddress;
-  @Autowired
+
   private ServiceDiscovery serviceDiscovery;
+
+  public RpcProxy(String serverAddress) {
+    this.serverAddress = serverAddress;
+  }
+
+  public RpcProxy(ServiceDiscovery serviceDiscovery) {
+    this.serviceDiscovery = serviceDiscovery;
+  }
 
   @SuppressWarnings("unchecked")
   public <T> T create(Class<?> interfaceClass) {

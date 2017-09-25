@@ -9,11 +9,11 @@
 
     <context:property-placeholder location="classpath:rpc.properties"/>
 
-    <bean id="serviceDiscovery" class="org.zxh.rpc.registry.ServiceDiscovery">
+    <bean id="serviceDiscovery" class="org.rpc.registry.ServiceDiscovery">
         <constructor-arg name="registryAddress" value="${registry.address}"/>
     </bean>
 
-    <bean id="rpcProxy" class="org.zxh.rpc.client.RpcProxy">
+    <bean id="rpcProxy" class="org.rpc.client.RpcProxy">
         <constructor-arg name="serviceDiscovery" ref="serviceDiscovery"/>
     </bean>
 

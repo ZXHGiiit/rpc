@@ -45,10 +45,10 @@ public class ServiceDiscovery {
     if (size > 0) {
       if (size == 1) {
         data = dataList.get(0);
-        LOGGER.info("ServiceDiscovery.discover.using only data: {}", data);
+        LOGGER.debug("ServiceDiscovery.discover.using only data: {}", data);
       } else {
         data = dataList.get(ThreadLocalRandom.current().nextInt(size));
-        LOGGER.info("ServiceDiscovery.discover.using random data:{}", data);
+        LOGGER.debug("ServiceDiscovery.discover.using random data:{}", data);
       }
     }
     return data;

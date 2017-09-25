@@ -47,6 +47,12 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
     this.serverAddress = serverAddress;
   }
 
+  //Spring构造方法注入
+  public RpcServer(String serverAddress, ServiceRegistry serviceRegistry) {
+    this.serverAddress = serverAddress;
+    this.serviceRegistry = serviceRegistry;
+  }
+
   /**
    * 通过注解，获取标注了rpc服务注解的业务类，放入handlerMap中
    */
@@ -96,6 +102,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
       //启动RPC服务
       ChannelFuture future = bootstrap.bind(host, port);
       LOGGER.info("server started on port{}", port);
+      System.out.println("server started on port{}" + port);
       //注册rpc服务
       if (serviceRegistry != null) {
         serviceRegistry.register(serverAddress);
@@ -104,6 +111,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
       future.channel().closeFuture().sync();
     } catch (Exception e) {
       LOGGER.error("RpcServer.ServerBootStrap启动失败", e);
+      System.out.println("启动失败" + e);
     } finally {
       workGroup.shutdownGracefully();
       bossGroup.shutdownGracefully();
