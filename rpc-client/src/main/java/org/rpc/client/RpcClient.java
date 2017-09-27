@@ -32,15 +32,6 @@ public class RpcClient extends SimpleChannelInboundHandler<RpcResponse> {
 
   private final Object obj = new Object();
 
-  /**
-   * 异常处理
-   */
-  @Override
-  public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-    LOGGER.error("RpcClient caught exception", cause);
-    ctx.close();
-  }
-
   public RpcClient(String host, int port) {
     this.host = host;
     this.port = port;
@@ -85,9 +76,18 @@ public class RpcClient extends SimpleChannelInboundHandler<RpcResponse> {
    */
   @Override
   protected void channelRead0(ChannelHandlerContext ctx, RpcResponse msg) throws Exception {
-    this.response = response;
+    this.response = msg;
     synchronized (obj) {
       obj.notifyAll();
     }
+  }
+
+  /**
+   * 异常处理
+   */
+  @Override
+  public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    LOGGER.error("RpcClient caught exception", cause);
+    ctx.close();
   }
 }

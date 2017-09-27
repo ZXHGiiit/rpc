@@ -72,7 +72,7 @@ public class ServiceRegistry {
 
       String path = zk.create(Constant.ZK_DATA_PATH, bytes, ZooDefs.Ids.OPEN_ACL_UNSAFE,
         CreateMode.EPHEMERAL_SEQUENTIAL);
-      LOGGER.debug("ServiceRegistry.createNode.create zk node ({} => {})", path, data);
+      LOGGER.info("ServiceRegistry.createNode.create zk node ({} => {})", path, data);
     } catch (Exception e) {
       LOGGER.error("", e);
     }

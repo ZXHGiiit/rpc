@@ -25,15 +25,15 @@ public class RpcDecoder extends ByteToMessageDecoder {
       return;
     }
     in.markReaderIndex();
-    int datalength = in.readInt();
-    if (datalength < 0) {
+    int dataLength = in.readInt();
+    if (dataLength < 0) {
       ctx.close();
     }
-    if (in.readableBytes() < datalength) {
+    if (in.readableBytes() < dataLength) {
       in.resetReaderIndex();
     }
     //将ByteBuf转换为byte[]
-    byte[] data = new byte[datalength];
+    byte[] data = new byte[dataLength];
     in.readBytes(data);
     //对象序列化为数组
     Object obj = SerializableUtil.deserialize(data, genericClass);

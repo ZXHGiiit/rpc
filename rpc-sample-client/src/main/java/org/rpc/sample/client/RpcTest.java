@@ -1,12 +1,12 @@
 package org.rpc.sample.client;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.rpc.client.RpcProxy;
 import org.rpc.sample.api.HelloService;
 import org.rpc.sample.api.Person;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,19 +19,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:spring.xml")
 public class RpcTest {
   //private static final Logger LOGGER = LoggerFactory.getLogger(RpcTest.class);
-  private static final Log LOGGER = LogFactory.getLog(RpcTest.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(RpcTest.class);
   @Autowired
   private RpcProxy rpcProxy;
 
   @Test
   public void helloTest1() {
-    LOGGER.debug("RpcTest.helloTest1.begin==========>");
+    LOGGER.info("RpcTest.helloTest1.begin==========>");
 
     //调用代理的create方法，代理HelloService接口
     HelloService helloService = rpcProxy.create(HelloService.class);
 
     //调用代理的方法，执行invoke
-    String result = helloService.hello("RPC");
+    String result = helloService.hello("worlddddddd");
     LOGGER.info("服务端返回结果为============>");
     LOGGER.info("RpcTest.helloTest1.result: " + result);
   }

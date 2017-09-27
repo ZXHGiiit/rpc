@@ -45,10 +45,10 @@ public class ServiceDiscovery {
     if (size > 0) {
       if (size == 1) {
         data = dataList.get(0);
-        LOGGER.debug("ServiceDiscovery.discover.using only data: {}", data);
+        LOGGER.info("ServiceDiscovery.discover.using only data: {}", data);
       } else {
         data = dataList.get(ThreadLocalRandom.current().nextInt(size));
-        LOGGER.debug("ServiceDiscovery.discover.using random data:{}", data);
+        LOGGER.info("ServiceDiscovery.discover.using random data:{}", data);
       }
     }
     return data;
@@ -97,7 +97,7 @@ public class ServiceDiscovery {
           + node, false, null);
         dataList.add(new String(bytes));
       }
-      LOGGER.debug("ServiceDiscovery node date: {}", dataList);
+      LOGGER.info("ServiceDiscovery node date: {}", dataList);
       this.dataList = dataList;
     } catch (Exception e) {
       LOGGER.error("ServiceDiscovery", e);

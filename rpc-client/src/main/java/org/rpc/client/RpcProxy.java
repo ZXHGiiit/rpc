@@ -3,6 +3,8 @@ package org.rpc.client;
 import org.rpc.common.RpcRequest;
 import org.rpc.common.RpcResponse;
 import org.rpc.registry.ServiceDiscovery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -14,6 +16,7 @@ import java.util.UUID;
  * RPC 代理
  */
 public class RpcProxy {
+  private static final Logger LOGGER = LoggerFactory.getLogger(RpcProxy.class);
   private String serverAddress;
 
   private ServiceDiscovery serviceDiscovery;
@@ -53,6 +56,7 @@ public class RpcProxy {
           RpcClient client = new RpcClient(host, port);
           //通过netty向服务端发送请求
           RpcResponse response = client.send(request);
+          LOGGER.info("RpcProxy.create.response is : " + response.toString());
           //返回信息
           if (response.isError()) {
             throw response.getError();
